@@ -1,119 +1,449 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>shlanu</title>
+  <title>科技日报 - 探索未来科技，传递创新力量</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义颜色和字体 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#9D50BB',
+            secondary: '#6E48AA',
+            accent: '#F687B3',
+            dark: '#1E1B4B',
+            light: '#F3E8FF'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .gradient-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+      }
+      .nav-link {
+        @apply relative overflow-hidden after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary after:to-accent after:transition-all after:duration-300 hover:after:w-full;
+      }
+    }
+  </style>
+  
+  <style>
+    /* 全局渐变背景 */
+    body {
+      background: linear-gradient(135deg, #fcfaff 0%, #f3e8ff 100%);
+      background-attachment: fixed;
+    }
+    
+    /* 平滑滚动 */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* 加载动画 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .header-gradient {
+      background: linear-gradient(135deg, #9D50BB 0%, #6E48AA 50%, #F687B3 100%);
+    }
+    
+    /* 表格样式 */
+    .tech-table th {
+      background: linear-gradient(90deg, rgba(157, 80, 187, 0.1) 0%, rgba(246, 135, 179, 0.1) 100%);
+    }
+    
+    .tech-table tr:nth-child(even) {
+      background-color: rgba(243, 232, 255, 0.5);
+    }
+    
+    .tech-table tr:hover {
+      background-color: rgba(157, 80, 187, 0.05);
+    }
+  </style>
 </head>
 
-<body>
-  <header>
-    <h1 id="1"><a href=" ">科技日报</a ></h1>
-    探索未来科技，传递创新力量
-    <ul>
-      <li><a href="#">首页</a ></li>
-      <li><a href="#">科技动态</a ></li>
-      <li><a href="#">国际科技</a ></li>
-      <li><a href="#">科技论坛</a ></li>
-    </ul>
+<body class="font-sans text-gray-800 min-h-screen">
+  <!-- 导航栏 -->
+  <header id="header" class="header-gradient text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+    <div class="container mx-auto px-4 py-4 md:py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-left mb-4 md:mb-0">
+          <h1 id="1" class="text-2xl md:text-4xl font-bold font-heading tracking-tight">
+            <a href="#" class="flex items-center justify-center md:justify-start">
+              <i class="fa fa-microchip mr-2"></i>科技日报
+            </a>
+          </h1>
+          <p class="text-sm md:text-base opacity-90 mt-1">探索未来科技，传递创新力量</p>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:block">
+          <ul class="flex space-x-6 md:space-x-8">
+            <li><a href="#" class="nav-link font-medium hover:text-light transition-colors">首页</a></li>
+            <li><a href="#" class="nav-link font-medium hover:text-light transition-colors">科技动态</a></li>
+            <li><a href="#" class="nav-link font-medium hover:text-light transition-colors">国际科技</a></li>
+            <li><a href="#" class="nav-link font-medium hover:text-light transition-colors">科技论坛</a></li>
+          </ul>
+        </nav>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="menuBtn" class="md:hidden text-white text-2xl focus:outline-none">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+      
+      <!-- 移动端导航菜单 -->
+      <div id="mobileMenu" class="md:hidden hidden mt-4 pb-2 animate-fade-in">
+        <ul class="space-y-3">
+          <li><a href="#" class="block py-2 px-3 hover:bg-white/10 rounded transition-colors">首页</a></li>
+          <li><a href="#" class="block py-2 px-3 hover:bg-white/10 rounded transition-colors">科技动态</a></li>
+          <li><a href="#" class="block py-2 px-3 hover:bg-white/10 rounded transition-colors">国际科技</a></li>
+          <li><a href="#" class="block py-2 px-3 hover:bg-white/10 rounded transition-colors">科技论坛</a></li>
+        </ul>
+      </div>
+    </div>
   </header>
-  <h2>今日要闻</h2>
-  <h3>1.量子计算机取得突破性进展</h3>
-  <p>这次中国自主量子计算机“本源悟空”全球首次运行十亿级AI微调大模型，标志着国内已经开始通过量子-经典混合框架，将大模型参数优化转化为量子退火问题，实现量子计算机对AI大模型任务的协助。</p >
-  <p>
-    这将有助于国产AI大模型的技术落地。同时，由于量子计算机的算力优势，一旦相关的技术壁垒被攻克，国产算力的发展将不再受制于美西方的芯片管制措施。除此之外，量子计算还会优先处理高维参数优化、注意力机制等计算密集型任务，与经典算力形成互补。
-  </p >
-  <p>
-    结合国内现有的AI芯片产业，两者就可以发挥出1+1大于2的能力。但就目前而言，国用量子计算机在商用领域仍需要解决诸多问题。比如，需将量子比特数从72提升至千级规模，同时将量子门保真度从99.5%提高至99.99%，涉及超导材料、误差校正等关键技术攻关。
-  </p >
-  <p>量子计算需与经典体系深度耦合，推动编译器、开发工具链等生态成熟，降低应用门槛等。但就目前而言，国内在量子计算机领域的确已经开始领先全球，叠加美方近段时间的关税措施，其综合研发实力已经大不如之前。</p >
-  <img src="1.webp" style="max-width:100%;height:auto;" alt="量子计算机突破">
-  <p>人工智能在医疗领域的最新应用</p >
-  <h3>2.AI辅助诊断准确率突破95%</h3>
-  <p>近日，美国科技公司DeepHealth宣布，其研发的AI医疗诊断系统在乳腺癌筛查中的准确率超过95%，远超人类医生的平均水平。该系统通过深度学习技术，能够快速分析医学影像，识别早期癌症病变，并提供诊断建议。</p >
-  <p>目前，DeepHealth的AI系统已在美国多家医院试点应用，未来有望在全球范围内推广。专家表示，AI技术的引入将极大提高医疗诊断的效率和准确性，为患者带来更好的治疗效果。</p >
-  <img src="2.webp" style="max-width:100%;height:auto;" alt="AI医疗诊断"><br>
-  <br>
-  "这是医疗AI发展的里程碑"<br>
-  —引自《科技报告》主编WSWW
-  <h3>3.行业数据</h3>
-  <table border="1">
-    <tr>
-      <th>领域</th>
-      <th>投资额（亿美元）</th>
-      <th>增长率</th>
-    </tr>
-    <tr>
-      <td>人工智能</td>
-      <td>580</td>
-      <td>+42%</td>
-    </tr>
-    <tr>
-      <td>量子计算</td>
-      <td>120</td>
-      <td>+215%</td>
-    </tr>
-    <tr>
-      <td>生物科技</td>
-      <td>80</td>
-      <td>+120%</td>
-    </tr>
-    <tr>
-      <td>机器人</td>
-      <td>100</td>
-      <td>+150%</td>
-    </tr>
-    <tr>
-      <td>VR/AR</td>
-      <td>20</td>
-      <td>+100%</td>
-    </tr>
-    <tr>
-      <td>自动驾驶</td>
-      <td>10</td>
-      <td>+120%</td>
-    </tr>
-  </table>
-  <h3>4.读者互动</h3>
-  您最关注的科技领域是？（单选）
-  <ul>
-    <label>
-      <li><input type="radio" name="1">人工智能</li>
-    </label>
-    <label>
-      <li><input type="radio" name="1">量子计算</li>
-    </label>
-    <label>
-      <li><input type="radio" name="1">生物科技</li>
-    </label>
-    <label>
-      <li><input type="radio" name="1">机器人</li>
-    </label>
-    <label>
-      <li><input type="radio" name="1">VR/AR</li>
-    </label>
-    <label>
-      <li><input type="radio" name="1">自动驾驶</li>
-    </label>
-  </ul>
-  <br>
-  留下您的观点：<br>
-  <textarea rows="8" cols="20"></textarea>
-  <br>
-  <button name="resepect">提交</button>
-  <h3>5.科技大讲堂</h3>
-  <video src="video.mp4" style="max-width:100%;height:auto;" controls poster="poster.jpg"
-    preload="metadata" autoplay loop muted></video><br>
-  <br>
-  《未来十年科技趋势》讲座节选
-  <footer>
-    <p>© 2025 科技日报社 版权所有 </p >
-    <p>京ICP备20250001号-1</p >
-    联系我们：<a href="mailto:123@qq.com">123@qq.com</a > <br>
-    地址：北京市大厦 <br>
-    <a href="#1">返回内容顶部</a >
+
+  <!-- 主内容区 -->
+  <main class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- 今日要闻标题 -->
+    <section class="mb-12 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold font-heading gradient-text mb-2 inline-block">今日要闻</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+    </section>
+    
+    <!-- 新闻1：量子计算机 -->
+    <article class="mb-16 bg-white rounded-2xl shadow-md p-6 md:p-8 card-hover">
+      <h3 class="text-2xl font-bold text-dark mb-4 flex items-center">
+        <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-center leading-8 mr-3">1</span>
+        量子计算机取得突破性进展
+      </h3>
+      
+      <div class="prose lg:prose-xl max-w-none text-gray-700 space-y-4">
+        <p>这次中国自主量子计算机"本源悟空"全球首次运行十亿级AI微调大模型，标志着国内已经开始通过量子-经典混合框架，将大模型参数优化转化为量子退火问题，实现量子计算机对AI大模型任务的协助。</p>
+        
+        <p>这将有助于国产AI大模型的技术落地。同时，由于量子计算机的算力优势，一旦相关的技术壁垒被攻克，国产算力的发展将不再受制于美西方的芯片管制措施。除此之外，量子计算还会优先处理高维参数优化、注意力机制等计算密集型任务，与经典算力形成互补。</p>
+        
+        <p>结合国内现有的AI芯片产业，两者就可以发挥出1+1大于2的能力。但就目前而言，国用量子计算机在商用领域仍需要解决诸多问题。比如，需将量子比特数从72提升至千级规模，同时将量子门保真度从99.5%提高至99.99%，涉及超导材料、误差校正等关键技术攻关。</p>
+        
+        <p>量子计算需与经典体系深度耦合，推动编译器、开发工具链等生态成熟，降低应用门槛等。但就目前而言，国内在量子计算机领域的确已经开始领先全球，叠加美方近段时间的关税措施，其综合研发实力已经大不如之前。</p>
+      </div>
+      
+      <div class="mt-6 overflow-hidden rounded-xl">
+        <img src="https://picsum.photos/id/1/800/400" alt="量子计算机突破" class="w-full h-auto transform hover:scale-105 transition-transform duration-500">
+      </div>
+    </article>
+    
+    <!-- 新闻2：AI医疗 -->
+    <article class="mb-16 bg-white rounded-2xl shadow-md p-6 md:p-8 card-hover">
+      <h3 class="text-2xl font-bold text-dark mb-4 flex items-center">
+        <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-center leading-8 mr-3">2</span>
+        AI辅助诊断准确率突破95%
+      </h3>
+      
+      <div class="prose lg:prose-xl max-w-none text-gray-700 space-y-4">
+        <p>近日，美国科技公司DeepHealth宣布，其研发的AI医疗诊断系统在乳腺癌筛查中的准确率超过95%，远超人类医生的平均水平。该系统通过深度学习技术，能够快速分析医学影像，识别早期癌症病变，并提供诊断建议。</p>
+        
+        <p>目前，DeepHealth的AI系统已在美国多家医院试点应用，未来有望在全球范围内推广。专家表示，AI技术的引入将极大提高医疗诊断的效率和准确性，为患者带来更好的治疗效果。</p>
+      </div>
+      
+      <div class="mt-6 overflow-hidden rounded-xl">
+        <img src="https://picsum.photos/id/2/800/400" alt="AI医疗诊断" class="w-full h-auto transform hover:scale-105 transition-transform duration-500">
+      </div>
+      
+      <div class="mt-4 italic text-gray-600 border-l-4 border-primary/30 pl-4 py-2">
+        "这是医疗AI发展的里程碑"<br>
+        —引自《科技报告》主编WSWW
+      </div>
+    </article>
+    
+    <!-- 行业数据 -->
+    <article class="mb-16 bg-white rounded-2xl shadow-md p-6 md:p-8 card-hover">
+      <h3 class="text-2xl font-bold text-dark mb-6 flex items-center">
+        <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-center leading-8 mr-3">3</span>
+        行业数据
+      </h3>
+      
+      <div class="overflow-x-auto">
+        <table class="tech-table w-full border-collapse rounded-lg overflow-hidden">
+          <thead>
+            <tr>
+              <th class="py-3 px-4 text-left font-semibold text-gray-700 border-b-2 border-primary/20">领域</th>
+              <th class="py-3 px-4 text-left font-semibold text-gray-700 border-b-2 border-primary/20">投资额（亿美元）</th>
+              <th class="py-3 px-4 text-left font-semibold text-gray-700 border-b-2 border-primary/20">增长率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="transition-colors duration-200">
+              <td class="py-3 px-4 border-b border-gray-100">人工智能</td>
+              <td class="py-3 px-4 border-b border-gray-100">580</td>
+              <td class="py-3 px-4 border-b border-gray-100 text-green-600">+42%</td>
+            </tr>
+            <tr class="transition-colors duration-200">
+              <td class="py-3 px-4 border-b border-gray-100">量子计算</td>
+              <td class="py-3 px-4 border-b border-gray-100">120</td>
+              <td class="py-3 px-4 border-b border-gray-100 text-green-600">+215%</td>
+            </tr>
+            <tr class="transition-colors duration-200">
+              <td class="py-3 px-4 border-b border-gray-100">生物科技</td>
+              <td class="py-3 px-4 border-b border-gray-100">80</td>
+              <td class="py-3 px-4 border-b border-gray-100 text-green-600">+120%</td>
+            </tr>
+            <tr class="transition-colors duration-200">
+              <td class="py-3 px-4 border-b border-gray-100">机器人</td>
+              <td class="py-3 px-4 border-b border-gray-100">100</td>
+              <td class="py-3 px-4 border-b border-gray-100 text-green-600">+150%</td>
+            </tr>
+            <tr class="transition-colors duration-200">
+              <td class="py-3 px-4 border-b border-gray-100">VR/AR</td>
+              <td class="py-3 px-4 border-b border-gray-100">20</td>
+              <td class="py-3 px-4 border-b border-gray-100 text-green-600">+100%</td>
+            </tr>
+            <tr class="transition-colors duration-200">
+              <td class="py-3 px-4">自动驾驶</td>
+              <td class="py-3 px-4">10</td>
+              <td class="py-3 px-4 text-green-600">+120%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+    
+    <!-- 读者互动 -->
+    <article class="mb-16 bg-white rounded-2xl shadow-md p-6 md:p-8 card-hover">
+      <h3 class="text-2xl font-bold text-dark mb-6 flex items-center">
+        <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-center leading-8 mr-3">4</span>
+        读者互动
+      </h3>
+      
+      <form class="space-y-6">
+        <div>
+          <p class="text-lg font-medium text-gray-700 mb-4">您最关注的科技领域是？（单选）</p>
+          <ul class="space-y-3 pl-4">
+            <li class="flex items-center">
+              <input type="radio" id="ai" name="techField" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+              <label for="ai" class="ml-2 text-gray-700 cursor-pointer hover:text-primary transition-colors">人工智能</label>
+            </li>
+            <li class="flex items-center">
+              <input type="radio" id="quantum" name="techField" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+              <label for="quantum" class="ml-2 text-gray-700 cursor-pointer hover:text-primary transition-colors">量子计算</label>
+            </li>
+            <li class="flex items-center">
+              <input type="radio" id="biotech" name="techField" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+              <label for="biotech" class="ml-2 text-gray-700 cursor-pointer hover:text-primary transition-colors">生物科技</label>
+            </li>
+            <li class="flex items-center">
+              <input type="radio" id="robotics" name="techField" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+              <label for="robotics" class="ml-2 text-gray-700 cursor-pointer hover:text-primary transition-colors">机器人</label>
+            </li>
+            <li class="flex items-center">
+              <input type="radio" id="vr" name="techField" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+              <label for="vr" class="ml-2 text-gray-700 cursor-pointer hover:text-primary transition-colors">VR/AR</label>
+            </li>
+            <li class="flex items-center">
+              <input type="radio" id="auto" name="techField" class="w-4 h-4 text-primary focus:ring-primary border-gray-300">
+              <label for="auto" class="ml-2 text-gray-700 cursor-pointer hover:text-primary transition-colors">自动驾驶</label>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <label for="opinion" class="block text-lg font-medium text-gray-700 mb-2">留下您的观点：</label>
+          <textarea id="opinion" rows="5" cols="50" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none" placeholder="请输入您的想法..."></textarea>
+        </div>
+        
+        <button type="submit" class="bg-gradient-to-r from-primary to-accent text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2">
+          <i class="fa fa-paper-plane mr-2"></i>提交
+        </button>
+      </form>
+    </article>
+    
+    <!-- 科技大讲堂 -->
+    <article class="mb-16 bg-white rounded-2xl shadow-md p-6 md:p-8 card-hover">
+      <h3 class="text-2xl font-bold text-dark mb-6 flex items-center">
+        <span class="inline-block w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-center leading-8 mr-3">5</span>
+        科技大讲堂
+      </h3>
+      
+      <div class="rounded-xl overflow-hidden shadow-md">
+        <video src="video.mp4" class="w-full h-auto" controls poster="https://picsum.photos/id/3/800/400" preload="metadata"></video>
+      </div>
+      
+      <p class="mt-4 text-center text-gray-600 italic">《未来十年科技趋势》讲座节选</p>
+    </article>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="text-xl font-bold mb-4 gradient-text inline-block">科技日报</h4>
+          <p class="text-gray-300 mb-4">探索未来科技，传递创新力量</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xl">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xl">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xl">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xl">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">首页</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">科技动态</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">国际科技</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">科技论坛</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">关于我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex items-start">
+              <i class="fa fa-envelope-o mt-1 mr-3"></i>
+              <a href="mailto:123@qq.com" class="hover:text-white transition-colors">123@qq.com</a>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker mt-1 mr-3"></i>
+              <span>北京市大厦</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone mt-1 mr-3"></i>
+              <span>010-12345678</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2025 科技日报社 版权所有</p>
+        <p class="mt-1">京ICP备20250001号-1</p>
+        <div class="mt-4">
+          <a href="#1" class="inline-flex items-center text-gray-400 hover:text-white transition-colors">
+            <i class="fa fa-arrow-up mr-2"></i>返回顶部
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 移动端菜单切换
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      // 切换图标
+      const icon = menuBtn.querySelector('i');
+      if (icon.classList.contains('fa-bars')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+    
+    // 滚动时导航栏效果
+    const header = document.getElementById('header');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > 50) {
+        header.classList.add('py-2');
+        header.classList.remove('py-4', 'md:py-6');
+        header.classList.add('shadow-xl');
+      } else {
+        header.classList.remove('py-2');
+        header.classList.add('py-4', 'md:py-6');
+        header.classList.remove('shadow-xl');
+      }
+      
+      lastScrollTop = scrollTop;
+    });
+    
+    // 图片懒加载
+    document.addEventListener("DOMContentLoaded", function() {
+      const lazyImages = [].slice.call(document.querySelectorAll("img"));
+      
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target;
+              lazyImage.classList.add('opacity-100');
+              lazyImage.classList.remove('opacity-0');
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
+        
+        lazyImages.forEach(function(lazyImage) {
+          lazyImage.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+          lazyImageObserver.observe(lazyImage);
+        });
+      }
+    });
+    
+    // 平滑滚动到锚点
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // 关闭移动菜单（如果打开）
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          const icon = menuBtn.querySelector('i');
+          icon.classList.replace('fa-times', 'fa-bars');
+        }
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
